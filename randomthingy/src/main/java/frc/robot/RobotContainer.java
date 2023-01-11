@@ -19,8 +19,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // private final DriveTrain m_driveTrain = new DriveTrain();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final GoForward goForward = new GoForward();
 
   public DriveTrain driveTrain = new DriveTrain();
 
@@ -54,6 +56,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    aButton.whenHeld(new m_goForward(driveTrain)); // comment
     /*
     aButton.whenHeld(
       new IndexIntakeCommand(

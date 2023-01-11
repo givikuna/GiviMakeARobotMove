@@ -17,7 +17,7 @@ public class GoForwad extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public GoForward(ExampleSubsystem driveTrain) {
+  public GoForward(DriveTrain driveTrain) {
     m_driveTrain = driveTrain;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
@@ -26,20 +26,20 @@ public class GoForwad extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_driveTrain.tankDrive(0.5);
+    System.out.println("THE COMMAND HAS BEEN INITIALIZED");
+    System.out.println("THE EXPLOSION WILL HAPPEN IN TWO MINUTES");
+    System.out.println("RUN! (or you will go boom boom!)");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_driveTrain.tankDrive(0.5, 0.5);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+  public void end(boolean interrupted) {
+    m_driveTrain.tankDrive(0.0, 0.0);
   }
 }

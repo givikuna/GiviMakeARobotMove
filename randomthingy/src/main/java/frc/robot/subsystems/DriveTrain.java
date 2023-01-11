@@ -81,8 +81,8 @@ public class DriveTrain extends SubsystemBase {
         // forward
     }
 
-    public void tankDrive(double speed) {
-        leftParent.set(speed);
-        rightParent.set(speed);
+    public void tankDrive(double lSpeed, rSpeed) {
+        leftParent.set(lSpeed);
+        rightParent.set(rSpeed);
     }
 }
