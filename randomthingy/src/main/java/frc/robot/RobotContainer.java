@@ -56,7 +56,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    aButton.whenHeld(new m_goForward(driveTrain)); // comment
+    aButton.whileHeld(new m_goForward(driveTrain)); // comment
     /*
     aButton.whenHeld(
       new IndexIntakeCommand(
