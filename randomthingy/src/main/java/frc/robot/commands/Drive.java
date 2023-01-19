@@ -8,17 +8,23 @@ import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class GoForwad extends CommandBase {
+public class Drive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveTrain m_driveTrain;
+  private double m_lSpeed;
+  private double m_rSpeed;
+  private String m_button;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public GoForward(DriveTrain driveTrain) {
+  public Drive(DriveTrain driveTrain, double lSpeed, double rSpeed, String button) {
     m_driveTrain = driveTrain;
+    m_lSpeed = lSpeed;
+    m_rSpeed = rSpeed;
+    m_button = button;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
   }
@@ -34,12 +40,12 @@ public class GoForwad extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.tankDrive(0.5, 0.5);
+    m_driveTrain.tankDrive(m_lSpeed, m_rSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_driveTrain.tankDrive(0.0, 0.0);
+    m_driveTrain.tankDrive(0, 0);
   }
 }

@@ -4,11 +4,14 @@
 
 package frc.robot;
 
+import static frc.robot.Constants.FlagConstants.*;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import java.util.HashMap;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,11 +21,11 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   // private final DriveTrain m_driveTrain = new DriveTrain();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final GoForward goForward = new GoForward();
+  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final Drive drive = new Drive();
 
   public DriveTrain driveTrain = new DriveTrain();
 
@@ -30,18 +33,18 @@ public class RobotContainer {
   private Joystick rightDriveJoystick = new Joystick(1); // should be in port 1
   public XboxController xboxController = new XboxController(2); // should be in port 2
 
-    // xbox controller buttons
-    public JoystickButton aButton = new JoystickButton(xboxController, 1);
-    public JoystickButton bButton = new JoystickButton(xboxController, 2);
-    public JoystickButton xButton = new JoystickButton(xboxController, 3);
-    public JoystickButton yButton = new JoystickButton(xboxController, 4);
-    public JoystickButton lbButton = new JoystickButton(xboxController, 5);
-    public JoystickButton rbButton = new JoystickButton(xboxController, 6);
-    public JoystickButton startButton = new JoystickButton(xboxController, 8);
-    public JoystickButton backButton = new JoystickButton(xboxController, 7);
-    // xbox trigger
-    public Trigger rightTrigger = new Trigger(() -> (xboxController.getRightTriggerAxis() > 0.75));
-    public Trigger leftTrigger = new Trigger(() -> (xboxController.getLeftTriggerAxis() > 0.75));
+  // xbox controller buttons
+  public JoystickButton aButton = new JoystickButton(xboxController, 1);
+  public JoystickButton bButton = new JoystickButton(xboxController, 2);
+  public JoystickButton xButton = new JoystickButton(xboxController, 3);
+  public JoystickButton yButton = new JoystickButton(xboxController, 4);
+  public JoystickButton lbButton = new JoystickButton(xboxController, 5);
+  public JoystickButton rbButton = new JoystickButton(xboxController, 6);
+  public JoystickButton startButton = new JoystickButton(xboxController, 8);
+  public JoystickButton backButton = new JoystickButton(xboxController, 7);
+  // xbox trigger
+  public Trigger rightTrigger = new Trigger(() -> (xboxController.getRightTriggerAxis() > 0.75));
+  public Trigger leftTrigger = new Trigger(() -> (xboxController.getLeftTriggerAxis() > 0.75));
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -56,7 +59,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    aButton.whileHeld(new m_goForward(driveTrain)); // comment
+    //
+    /*
+      yButton.whileHeld(new m_goForward(driveTrain, 1.0, 1.0, "y"));
+      aButton.whileHeld(new m_goForward(driveTrain, -1.0, -1.0, "a"));
+      xButton.whileHeld(new m_goForward(driveTrain, -1.0, 1.0, "x"));
+      bButton.whileHeld(new m_goForward(driveTrain, 1.0, -1.0, "b"));
+    */
+
     /*
     aButton.whenHeld(
       new IndexIntakeCommand(
@@ -70,10 +80,18 @@ public class RobotContainer {
   }
 
   public double getLeftJoystickY() {
-    return -leftDriveJoystick.getY();
+    return leftDriveJoystick.getY();
+  }
+
+  public double getLeftJoystickX() {
+    return leftDriveJoystick.getX();
   }
 
   public double getRightJoystickY() {
+    return rightDriveJoystick.getY();
+  }
+
+  public double getRightJoystickX() {
     return rightDriveJoystick.getX();
   }
 
@@ -99,6 +117,16 @@ public class RobotContainer {
 
   public double getControllerRightX() {
     return xboxController.getRightX();
+  }
+
+  public HashMap currentLoc() {
+    HashMap<String, Double> loc = new HashMap<>();
+    loc.put("leftX", getLeftJoystickX());
+    loc.put("leftY", getLeftJoystickY());
+    loc.put("rightX", getRightJoystickX());
+    loc.put("rightY", getRightJoystickY());
+
+    return loc;
   }
 
   /**

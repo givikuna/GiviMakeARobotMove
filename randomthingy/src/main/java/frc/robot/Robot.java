@@ -6,8 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.GoForward;
+import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import java.util.HashMap;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -78,12 +79,15 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_robotContainer.driveTrain.setDefaultCommand(new GoForward(m_robotContainer.driveTrain));
+    // m_robotContainer.driveTrain.setDefaultCommand(new GoForward(m_robotContainer.driveTrain));
   }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    HashMap<String, Double> loc = m_robotContainer.currentLoc();
+    m_robotContainer.driveTrain.tankDrive(loc);
+  }
 
   @Override
   public void testInit() {

@@ -6,13 +6,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.networktables.NetworkTableEntry;
+
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import java.util.HashMap;
 
 public class DriveTrain extends SubsystemBase {
     public final WPI_TalonFX leftParent;
@@ -20,13 +19,6 @@ public class DriveTrain extends SubsystemBase {
     private final WPI_TalonFX leftChild;
     private final WPI_TalonFX rightChild;
     private final DifferentialDrive driveBase;
-  
-    private NetworkTableEntry m_xEntry =
-        NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("X");
-    private NetworkTableEntry m_yEntry =
-        NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("Y");
-    private final DifferentialDriveOdometry odometry;
-    private final AHRS gyro;
 
     public DriveTrain() {
         leftParent = new WPI_TalonFX(LEFT_PARENT_ID);
@@ -45,12 +37,6 @@ public class DriveTrain extends SubsystemBase {
         driveBase = new DifferentialDrive(leftParent, rightParent);
         driveBase.setDeadband(DEADBAND);
         driveBase.setSafetyEnabled(false);
-    
-        // setAllToBrake();
-    
-        gyro = new AHRS(SPI.Port.kMXP);
-        gyro.enableLogging(true);
-        odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
     }
 
     /**
@@ -81,8 +67,18 @@ public class DriveTrain extends SubsystemBase {
         // forward
     }
 
-    public void tankDrive(double lSpeed, rSpeed) {
-        leftParent.set(lSpeed);
-        rightParent.set(rSpeed);
+    public void tankDrive(HashMap<String, Double> loc) {
+        setLeftMotors(loc.get("leftY") / 5.0);
+        setRightMotors(loc.get("LeftX") / 5.0);
+    }
+
+    public void setLeftMotors(double sichqare) {
+        leftParent.set(sichqare);
+        leftChild.set(sichqare);
+    }
+
+    public void setRightMotors(double sichqare) {
+        rightParent.set(sichqare);
+        rightChild.set(sichqare);
     }
 }
