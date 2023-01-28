@@ -28,11 +28,6 @@ import frc.robot.commands.*;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   // MOTORS:
-  private final CANSparkMax m_frontLeft = new CANSparkMax(frontLeftID, MotorType.kBrushless);
-  private final CANSparkMax m_frontRight = new CANSparkMax(frontRightID, MotorType.kBrushless);
-  private final CANSparkMax m_backLeft = new CANSparkMax(backLeftID, MotorType.kBrushless);
-  private final CANSparkMax m_backRight = new CANSparkMax(backRightID, MotorType.kBrushless);
-  private final m_robotDrive = new DifferentialDrive(m_frontLeft, m_frontRight);
   private final Timer m_timer = new Timer();
 
 
@@ -116,7 +111,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     // Drive driveCmd = new Drive();
-    m_robotContainer.getDriveCmd();
+    // m_robotContainer.getDriveCmd();
   }
 
   @Override

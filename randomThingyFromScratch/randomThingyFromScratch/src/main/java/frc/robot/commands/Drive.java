@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import java.util.function.Supplier;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -21,7 +22,7 @@ public class Drive extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
 
-  public Drive(DriveTrain driveTrain, double leftSpeed, double rightSpeed) {
+  public Drive(DriveTrain driveTrain, Supplier<Double> leftSpeed, Supplier<Double> rightSpeed) {
     m_driveTrain = driveTrain;
     this.leftSpeed = leftSpeed;
     this.rightSpeed = rightSpeed;

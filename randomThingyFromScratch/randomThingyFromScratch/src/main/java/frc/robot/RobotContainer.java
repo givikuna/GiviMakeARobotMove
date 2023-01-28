@@ -47,12 +47,14 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_drive = new Drive(m_driveTrain);
+    m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, () -> leftJoystick.geY() / 5.0, () -> rightJoystick.getY() / 5.0))
   }
-
+  /* 
   public void getDriveCmd() {
     m_drive = new Drive(m_driveTrain, leftJoystick.geY() / 5.0, rightJoystick.getY() / 5.0);
     m_drive.execute();
   }
+  */
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
