@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.COM_Drive;
 import frc.robot.subsystems.SUB_DriveTrain;
+import java.util.function.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -27,9 +28,6 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   private XboxController xboxController = new XboxController(2);
-
-  JoystickButton leftStick = new JoystickButton(xboxController, XboxController.Button.kLeftStick.value);
-  JoystickButton rightStick = new JoystickButton(xboxController, XboxController.Button.kRightStick.value);
 
   private SUB_DriveTrain m_driveTrain = new SUB_DriveTrain();
   private COM_Drive m_drive;
@@ -97,13 +95,14 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_drive = new COM_Drive(m_driveTrain, getRawAxis(leftStick.), rightStick.getRawAxis(2));
+    // m_drive = new COM_Drive(m_driveTrain, xboxController.getLeftY(), xboxController.getRightY());
   }
 
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    m_driveTrain.setDefaultCommand(new COM_Drive(m_driveTrain, () -> xboxController.getLeftY(), () -> xboxController.getRightY()));
   }
 
   /** This function is called periodically during test mode. */

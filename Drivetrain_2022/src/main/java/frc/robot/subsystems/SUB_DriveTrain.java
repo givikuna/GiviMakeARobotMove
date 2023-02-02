@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import java.util.function.*;
 
 public class SUB_DriveTrain extends SubsystemBase {
 
@@ -28,8 +29,8 @@ public class SUB_DriveTrain extends SubsystemBase {
   
   }
 
-  public void differentialDrive(double leftSpeed, double rightSpeed) {
-    m_differentialDrive.tankDrive(leftSpeed, rightSpeed);
+  public void differentialDrive(Supplier<Double> leftSpeed, Supplier<Double> rightSpeed) {
+    m_differentialDrive.tankDrive(leftSpeed.get(), rightSpeed.get());
   }
 
   @Override
