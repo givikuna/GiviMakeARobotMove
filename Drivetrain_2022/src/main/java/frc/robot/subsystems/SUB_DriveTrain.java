@@ -6,9 +6,12 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.COM_Drive;
+
 import java.util.function.*;
 
 public class SUB_DriveTrain extends SubsystemBase {
@@ -26,8 +29,18 @@ public class SUB_DriveTrain extends SubsystemBase {
 
   /** Creates a new SUB_DriveTrain. */
   public SUB_DriveTrain() {
-  
+    //
   }
+
+
+  /*
+    // THIS IS WRONG 
+    public void initDefaultCommand() {
+      // Set the default command for a subsystem here.
+      setDefaultCommand(new COM_Drive(new SUB_DriveTrain(), () -> xboxController.getLeftY(), () -> xboxController.getRightY()));
+    }
+    //
+  */
 
   public void differentialDrive(Supplier<Double> leftSpeed, Supplier<Double> rightSpeed) {
     m_differentialDrive.tankDrive(leftSpeed.get(), rightSpeed.get());

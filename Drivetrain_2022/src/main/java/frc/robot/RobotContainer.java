@@ -92,6 +92,7 @@ public class RobotContainer {
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     */
+    m_driveTrain.setDefaultCommand(new COM_Drive(m_driveTrain, () -> xboxController.getLeftY(), () -> xboxController.getRightY()));
   }
 
   /**

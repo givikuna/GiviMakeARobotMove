@@ -9,7 +9,9 @@ import frc.robot.subsystems.SUB_DriveTrain;
 import java.util.function.*;
 
 public class COM_Drive extends CommandBase {
-  private SUB_DriveTrain m_SUB_DriveTrain = new SUB_DriveTrain();
+  // THIS IS WRONG
+  private SUB_DriveTrain m_SUB_DriveTrain;
+  //
   private Supplier<Double> leftSpeed;
   private Supplier<Double> rightSpeed;
   private double leftSpeedDouble;
