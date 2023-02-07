@@ -90,7 +90,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_driveTrain.setDefaultCommand(new COM_Drive(m_driveTrain, () -> xboxController.getLeftY(), () -> xboxController.getRightY()));
+    // m_driveTrain.setDefaultCommand(new COM_Drive(m_driveTrain, () -> xboxController.getLeftY(), () -> xboxController.getRightY()));
   }
 
   /** This function is called periodically during operator control. */
