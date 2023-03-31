@@ -6,21 +6,25 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.COM_Drive;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import java.util.function.*;
 
 public class SUB_DriveTrain extends SubsystemBase {
 
-  private WPI_TalonSRX leftLeader = new WPI_TalonSRX(0);
-  private WPI_TalonSRX leftFollower = new WPI_TalonSRX(0);
+  private CANSparkMax leftLeader = new CANSparkMax(0, MotorType.kBrushless);
+  private CANSparkMax leftFollower = new CANSparkMax(0, MotorType.kBrushless);
 
-  private WPI_TalonSRX rightLeader = new WPI_TalonSRX(0);
-  private WPI_TalonSRX rightFollower = new WPI_TalonSRX(0);
+  private CANSparkMax rightLeader = new CANSparkMax(0, MotorType.kBrushless);
+  private CANSparkMax rightFollower = new CANSparkMax(0, MotorType.kBrushless);
 
   private MotorControllerGroup leftMotors = new MotorControllerGroup(leftLeader, leftFollower);
   private MotorControllerGroup rightMotors = new MotorControllerGroup(rightLeader, rightFollower);
